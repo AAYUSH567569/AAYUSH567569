@@ -171,6 +171,20 @@ footer {
         width: 100%;
     }
 }
+ .progress-box label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.progress-box input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}   
 </style>
 </head>
 
@@ -254,32 +268,31 @@ footer {
 
     </div>
 </section>
-
 <section id="progress">
-    <h2>📊 My Progress</h2>
+    <h2>📊 My Progress Tracker</h2>
 
     <div class="progress-box">
 
-        <h3>Workout Goal</h3>
-        <p>75% completed</p>
+        <label>Starting Weight (kg)</label>
+        <input type="number" id="startWeight" placeholder="Example: 70">
 
-        <div class="progress">
-            <div style="width:75%;"></div>
-        </div>
+        <label>Current Weight (kg)</label>
+        <input type="number" id="currentWeight" placeholder="Example: 67">
 
-        <h3>Fitness Goal</h3>
-        <p>60% completed</p>
+        <label>Goal Weight (kg)</label>
+        <input type="number" id="goalWeight" placeholder="Example: 60">
 
-        <div class="progress">
-            <div style="width:60%;"></div>
-        </div>
+        <label>Workout Days Completed</label>
+        <input type="number" id="workoutDays" placeholder="Example: 4">
 
-        <h3>Weekly Activity</h3>
-        <p>85% completed</p>
+        <label>Target Workout Days</label>
+        <input type="number" id="targetDays" placeholder="Example: 7">
 
-        <div class="progress">
-            <div style="width:85%;"></div>
-        </div>
+        <button class="button" onclick="calculateProgress()">
+            Update Progress
+        </button>
+
+        <div id="result" style="margin-top:25px;"></div>
 
     </div>
 </section>
@@ -288,6 +301,56 @@ footer {
     <p>© 2026 TrackFlex Fitness</p>
     <p>Stay Consistent • Stay Strong • Stay Healthy</p>
 </footer>
+<script>
+function calculateProgress() {
 
+    let start = Number(document.getElementById("startWeight").value);
+    let current = Number(document.getElementById("currentWeight").value);
+    let goal = Number(document.getElementById("goalWeight").value);
+
+    let workoutDays = Number(document.getElementById("workoutDays").value);
+    let targetDays = Number(document.getElementById("targetDays").value);
+
+    if (!start || !current || !goal || !workoutDays || !targetDays) {
+        document.getElementById("result").innerHTML =
+            "<p>Please fill all the fields.</p>";
+        return;
+    }
+
+    let weightProgress;
+
+    if (start > goal) {
+        weightProgress = ((start - current) / (start - goal)) * 100;
+    } else {
+        weightProgress = ((current - start) / (goal - start)) * 100;
+    }
+
+    weightProgress = Math.max(0, Math.min(100, weightProgress));
+
+    let workoutProgress = (workoutDays / targetDays) * 100;
+    workoutProgress = Math.max(0, Math.min(100, workoutProgress));
+
+    let overallProgress = (weightProgress + workoutProgress) / 2;
+
+    document.getElementById("result").innerHTML = `
+        <h3>🎯 Your Progress</h3>
+
+        <p>Weight Goal: ${Math.round(weightProgress)}%</p>
+        <div class="progress">
+            <div style="width:${weightProgress}%;"></div>
+        </div>
+
+        <p>Workout Goal: ${Math.round(workoutProgress)}%</p>
+        <div class="progress">
+            <div style="width:${workoutProgress}%;"></div>
+        </div>
+
+        <h3>Overall Progress: ${Math.round(overallProgress)}%</h3>
+        <div class="progress">
+            <div style="width:${overallProgress}%;"></div>
+        </div>
+    `;
+}
+</script>
 </body>
 </html>
