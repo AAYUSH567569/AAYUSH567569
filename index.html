@@ -341,6 +341,11 @@ function calculateProgress() {
     let workoutDays = Number(document.getElementById("workoutDays").value);
     let targetDays = Number(document.getElementById("targetDays").value);
 
+    localStorage.setItem("startWeight", start);
+    localStorage.setItem("currentWeight", current);
+    localStorage.setItem("goalWeight", goal);
+    localStorage.setItem("workoutDays", workoutDays);
+    localStorage.setItem("targetDays", targetDays);
     if (!start || !current || !goal || !workoutDays || !targetDays) {
         document.getElementById("result").innerHTML =
             "<p>Please fill all the fields.</p>";
@@ -381,6 +386,22 @@ function calculateProgress() {
         </div>
     `;
 }
+window.onload = function() {
+    document.getElementById("startWeight").value =
+        localStorage.getItem("startWeight") || "";
+
+    document.getElementById("currentWeight").value =
+        localStorage.getItem("currentWeight") || "";
+
+    document.getElementById("goalWeight").value =
+        localStorage.getItem("goalWeight") || "";
+
+    document.getElementById("workoutDays").value =
+        localStorage.getItem("workoutDays") || "";
+
+    document.getElementById("targetDays").value =
+        localStorage.getItem("targetDays") || "";
+};
 </script>
 </body>
 </html>
