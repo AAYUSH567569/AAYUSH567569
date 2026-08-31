@@ -248,13 +248,13 @@ footer {
     </div>
 
     <div class="stat-card">
-        <h3>🎯 75%</h3>
+        <h3>🎯 <span id="homeGoalProgress">75%</span></h3>
         <p>Goal Progress</p>
     </div>
 
     <div class="stat-card">
-        <h3>📅 6</h3>
-        <p>Active Days</p>
+<h3>📅 <span id="homeActiveDays">6</span></h3>
+<p>Active Days</p>
     </div>
 </section>
     
@@ -417,6 +417,12 @@ function calculateProgress() {
 
     let overallProgress = (weightProgress + workoutProgress) / 2;
 
+    document.getElementById("homeGoalProgress").textContent =
+    Math.round(overallProgress) + "%";
+
+document.getElementById("homeActiveDays").textContent =
+    workoutDays;
+    
     document.getElementById("result").innerHTML = `
         <h3>🎯 Your Progress</h3>
 
