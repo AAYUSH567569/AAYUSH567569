@@ -185,6 +185,35 @@ footer {
     border-radius: 6px;
     font-size: 16px;
 }   
+ .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.stat-card {
+    background: white;
+    width: 220px;
+    padding: 25px 15px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.stat-card p {
+    margin-top: 10px;
+    font-weight: bold;
+}   
 </style>
 </head>
 
@@ -207,7 +236,28 @@ footer {
     <p>Track your workouts, nutrition and fitness progress in one place.</p>
     <a class="button" href="#workout">Get Started</a>
 </section>
+<section class="stats">
+    <div class="stat-card">
+        <h3>🏋️ 12+</h3>
+        <p>Workout Plans</p>
+    </div>
 
+    <div class="stat-card">
+        <h3>🔥 500+</h3>
+        <p>Calories Target</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>🎯 75%</h3>
+        <p>Goal Progress</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>📅 6</h3>
+        <p>Active Days</p>
+    </div>
+</section>
+    
 <section id="workout">
     <h2>💪 Workout Plans</h2>
 
