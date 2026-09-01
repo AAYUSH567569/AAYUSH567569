@@ -457,6 +457,42 @@ window.onload = function() {
 
     document.getElementById("targetDays").value =
         localStorage.getItem("targetDays") || "";
+let savedWorkoutDays = Number(localStorage.getItem("workoutDays")) || 0;
+
+document.getElementById("homeActiveDays").textContent =
+    savedWorkoutDays;
+let savedStart = Number(localStorage.getItem("startWeight"));
+let savedCurrent = Number(localStorage.getItem("currentWeight"));
+let savedGoal = Number(localStorage.getItem("goalWeight"));
+let savedTarget = Number(localStorage.getItem("targetDays"));
+
+if (savedStart && savedCurrent && savedGoal && savedTarget && savedWorkoutDays) {
+
+    let savedWeightProgress;
+
+    if (savedStart > savedGoal) {
+        savedWeightProgress =
+            ((savedStart - savedCurrent) / (savedStart - savedGoal)) * 100;
+    } else {
+        savedWeightProgress =
+            ((savedCurrent - savedStart) / (savedGoal - savedStart)) * 100;
+    }
+
+    savedWeightProgress =
+        Math.max(0, Math.min(100, savedWeightProgress));
+
+    let savedWorkoutProgress =
+        (savedWorkoutDays / savedTarget) * 100;
+
+    savedWorkoutProgress =
+        Math.max(0, Math.min(100, savedWorkoutProgress));
+
+    let savedOverallProgress =
+        (savedWeightProgress + savedWorkoutProgress) / 2;
+
+    document.getElementById("homeGoalProgress").textContent =
+        Math.round(savedOverallProgress) + "%";
+}
 };
 </script>
 </body>
