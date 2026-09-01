@@ -368,6 +368,9 @@ footer {
         <label>Target Workout Days</label>
         <input type="number" id="targetDays" placeholder="Example: 7">
 
+        <label>Daily Calorie Target</label>
+        <input type="number" id="calorieTarget" placeholder="Example: 500">
+       
         <button class="button" onclick="calculateProgress()">
             Update Progress
         </button>
@@ -390,7 +393,12 @@ function calculateProgress() {
 
     let workoutDays = Number(document.getElementById("workoutDays").value);
     let targetDays = Number(document.getElementById("targetDays").value);
+    let calorieTarget = Number(document.getElementById("calorieTarget").value) || 500;
+    localStorage.setItem("calorieTarget", calorieTarget);
 
+    document.getElementById("homeCaloriesTarget").textContent =
+    calorieTarget + "+";
+    
     localStorage.setItem("startWeight", start);
     localStorage.setItem("currentWeight", current);
     localStorage.setItem("goalWeight", goal);
@@ -457,6 +465,11 @@ window.onload = function() {
 
     document.getElementById("targetDays").value =
         localStorage.getItem("targetDays") || "";
+    document.getElementById("calorieTarget").value =
+    localStorage.getItem("calorieTarget") || "500";
+
+document.getElementById("homeCaloriesTarget").textContent =
+    (localStorage.getItem("calorieTarget") || "500") + "+";
 let savedWorkoutDays = Number(localStorage.getItem("workoutDays")) || 0;
 
 document.getElementById("homeActiveDays").textContent =
